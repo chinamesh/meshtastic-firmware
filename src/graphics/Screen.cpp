@@ -1366,7 +1366,17 @@ int Screen::handleInputEvent(const InputEvent *event)
         // If no modules are using the input, move between frames
         if (!inputIntercepted) {
             if (event->inputEvent == INPUT_BROKER_LEFT || event->inputEvent == INPUT_BROKER_ALT_PRESS) {
+#if defined(GAT562_MESH_WATCH)
+                if (event->inputEvent == INPUT_BROKER_ALT_PRESS) {
+                    if (screenOn) {
+                        setOn(false);
+                    } else {
+                        setOn(true);
+                    }
+                }
+#else
                 showPrevFrame();
+#endif
             } else if (event->inputEvent == INPUT_BROKER_RIGHT || event->inputEvent == INPUT_BROKER_USER_PRESS) {
                 showNextFrame();
             } else if (event->inputEvent == INPUT_BROKER_SELECT) {
