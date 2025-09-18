@@ -433,9 +433,18 @@ bool CannedMessageModule::handleTabSwitch(const InputEvent *event)
 int CannedMessageModule::handleDestinationSelectionInput(const InputEvent *event, bool isUp, bool isDown, bool isSelect)
 {
     // Override isDown and isSelect ONLY for destination selector behavior
+    // Override isUp and isDown ONLY for destination selector behaviour
+    bool single_rotary_up = false;
+    bool single_rotary_down = false;
+    if (moduleConfig.canned_message.rotary1_enabled || moduleConfig.canned_message.updown1_enabled){
+        event->inputEvent == INPUT_BROKER_LEFT ? single_rotary_up = true : 0;
+        event->inputEvent == INPUT_BROKER_RIGHT ? single_rotary_down = true : 0;
+    }
     if (runState == CANNED_MESSAGE_RUN_STATE_DESTINATION_SELECTION) {
-        if (event->inputEvent == INPUT_BROKER_USER_PRESS) {
+        if (event->inputEvent == INPUT_BROKER_USER_PRESS || single_rotary_down ) {
             isDown = true;
+        } else if (single_rotary_up) {
+            isUp = true;
         } else if (event->inputEvent == INPUT_BROKER_SELECT) {
             isSelect = true;
         }
@@ -552,9 +561,18 @@ int CannedMessageModule::handleDestinationSelectionInput(const InputEvent *event
 bool CannedMessageModule::handleMessageSelectorInput(const InputEvent *event, bool isUp, bool isDown, bool isSelect)
 {
     // Override isDown and isSelect ONLY for canned message list behavior
+    // Override isUp and isDown ONLY for destination selector behaviour
+    bool single_rotary_up = false;
+    bool single_rotary_down = false;
+    if (moduleConfig.canned_message.rotary1_enabled || moduleConfig.canned_message.updown1_enabled){
+        event->inputEvent == INPUT_BROKER_LEFT ? single_rotary_up = true : 0;
+        event->inputEvent == INPUT_BROKER_RIGHT ? single_rotary_down = true : 0;
+    }
     if (runState == CANNED_MESSAGE_RUN_STATE_ACTIVE) {
-        if (event->inputEvent == INPUT_BROKER_USER_PRESS) {
+        if (event->inputEvent == INPUT_BROKER_USER_PRESS || single_rotary_down ) {
             isDown = true;
+        } else if (single_rotary_up) {
+            isUp = true;
         } else if (event->inputEvent == INPUT_BROKER_SELECT) {
             isSelect = true;
         }

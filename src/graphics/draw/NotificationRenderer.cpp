@@ -216,9 +216,15 @@ void NotificationRenderer::drawNodePicker(OLEDDisplay *display, OLEDDisplayUiSta
     }
 
     // Handle input
-    if (inEvent.inputEvent == INPUT_BROKER_UP || inEvent.inputEvent == INPUT_BROKER_ALT_PRESS) {
+    bool single_rotary_up = false;
+    bool single_rotary_down = false;
+    if (moduleConfig.canned_message.rotary1_enabled || moduleConfig.canned_message.updown1_enabled){
+        inEvent.inputEvent == INPUT_BROKER_LEFT ? single_rotary_up = true : 0;
+        inEvent.inputEvent == INPUT_BROKER_RIGHT ? single_rotary_down = true : 0;
+    }
+    if (inEvent.inputEvent == INPUT_BROKER_UP || single_rotary_up || inEvent.inputEvent == INPUT_BROKER_ALT_PRESS) {
         curSelected--;
-    } else if (inEvent.inputEvent == INPUT_BROKER_DOWN || inEvent.inputEvent == INPUT_BROKER_USER_PRESS) {
+    } else if (inEvent.inputEvent == INPUT_BROKER_DOWN || single_rotary_down || inEvent.inputEvent == INPUT_BROKER_USER_PRESS) {
         curSelected++;
     } else if (inEvent.inputEvent == INPUT_BROKER_SELECT) {
         alertBannerCallback(selectedNodenum);
@@ -333,9 +339,15 @@ void NotificationRenderer::drawAlertBannerOverlay(OLEDDisplay *display, OLEDDisp
 
     // Handle input
     if (alertBannerOptions > 0) {
-        if (inEvent.inputEvent == INPUT_BROKER_UP || inEvent.inputEvent == INPUT_BROKER_ALT_PRESS) {
+        bool single_rotary_up = false;
+        bool single_rotary_down = false;
+        if (moduleConfig.canned_message.rotary1_enabled || moduleConfig.canned_message.updown1_enabled){
+            inEvent.inputEvent == INPUT_BROKER_LEFT ? single_rotary_up = true : 0;
+            inEvent.inputEvent == INPUT_BROKER_RIGHT ? single_rotary_down = true : 0;
+        }
+        if (inEvent.inputEvent == INPUT_BROKER_UP || single_rotary_up || inEvent.inputEvent == INPUT_BROKER_ALT_PRESS) {
             curSelected--;
-        } else if (inEvent.inputEvent == INPUT_BROKER_DOWN || inEvent.inputEvent == INPUT_BROKER_USER_PRESS) {
+        } else if (inEvent.inputEvent == INPUT_BROKER_DOWN || single_rotary_down || inEvent.inputEvent == INPUT_BROKER_USER_PRESS) {
             curSelected++;
         } else if (inEvent.inputEvent == INPUT_BROKER_SELECT) {
             if (optionsEnumPtr != nullptr) {
