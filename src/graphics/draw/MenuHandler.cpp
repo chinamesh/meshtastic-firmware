@@ -932,7 +932,7 @@ void menuHandler::switchToMUIMenu()
 
 void menuHandler::TFTColorPickerMenu(OLEDDisplay *display)
 {
-    static const char *optionsArray[] = {"Back", "Default", "Meshtastic Green", "Yellow", "Red", "Orange", "Purple", "Teal",
+    static const char *optionsArray[] = {"Back", "Default", "MESHCN Green", "Yellow", "Red", "Orange", "Purple", "Teal",
                                          "Pink", "White"};
     BannerOverlayOptions bannerOptions;
     bannerOptions.message = "Select Screen Color";
@@ -947,7 +947,7 @@ void menuHandler::TFTColorPickerMenu(OLEDDisplay *display)
             LOG_INFO("Setting color to system default or defined variant");
             // Given just before we set all these to zero, we will allow this to go through
         } else if (selected == 2) {
-            LOG_INFO("Setting color to Meshtastic Green");
+            LOG_INFO("Setting color to MESHCN Green");
             TFT_MESH_r = 103;
             TFT_MESH_g = 234;
             TFT_MESH_b = 148;
