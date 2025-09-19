@@ -231,7 +231,7 @@ int handleAPIv1ToRadio(const struct _u_request *req, struct _u_response *res, vo
     ulfius_add_header_to_response(res, "Access-Control-Allow-Origin", "*");
     ulfius_add_header_to_response(res, "Access-Control-Allow-Methods", "PUT, OPTIONS");
     ulfius_add_header_to_response(res, "X-Protobuf-Schema",
-                                  "https://raw.githubusercontent.com/meshtastic/protobufs/master/meshtastic/mesh.proto");
+                                  "https://raw.githubusercontent.com/chinamesh/protobufs/master/meshtastic/mesh.proto");
 
     if (strcmp(req->http_verb, "OPTIONS") == 0) {
         ulfius_set_response_properties(res, U_OPT_STATUS, 204);
@@ -268,7 +268,7 @@ int handleAPIv1FromRadio(const struct _u_request *req, struct _u_response *res, 
     ulfius_add_header_to_response(res, "Access-Control-Allow-Origin", "*");
     ulfius_add_header_to_response(res, "Access-Control-Allow-Methods", "GET");
     ulfius_add_header_to_response(res, "X-Protobuf-Schema",
-                                  "https://raw.githubusercontent.com/meshtastic/protobufs/master/meshtastic/mesh.proto");
+                                  "https://raw.githubusercontent.com/chinamesh/protobufs/master/meshtastic/mesh.proto");
 
     if (strcmp(req->http_verb, "OPTIONS") == 0) {
         ulfius_set_response_properties(res, U_OPT_STATUS, 204);
@@ -336,8 +336,8 @@ int generate_self_signed_x509(EVP_PKEY *pkey, X509 **x509)
     // SET Subject Name
     X509_NAME *name = X509_get_subject_name(*x509);
     X509_NAME_add_entry_by_txt(name, "C", MBSTRING_ASC, (unsigned char *)"DE", -1, -1, 0);
-    X509_NAME_add_entry_by_txt(name, "O", MBSTRING_ASC, (unsigned char *)"Meshtastic", -1, -1, 0);
-    X509_NAME_add_entry_by_txt(name, "CN", MBSTRING_ASC, (unsigned char *)"meshtastic.local", -1, -1, 0);
+    X509_NAME_add_entry_by_txt(name, "O", MBSTRING_ASC, (unsigned char *)"MESHCN", -1, -1, 0);
+    X509_NAME_add_entry_by_txt(name, "CN", MBSTRING_ASC, (unsigned char *)"meshcn.local", -1, -1, 0);
     // Selfsigned,  Issuer = Subject
     X509_set_issuer_name(*x509, name);
 

@@ -235,14 +235,14 @@ const char *getDeviceName()
 
     getMacAddr(dmac);
 
-    // Meshtastic_ab3c or Shortname_abcd
+    // MESHCN_ab3c or Shortname_abcd
     static char name[20];
     snprintf(name, sizeof(name), "%02x%02x", dmac[4], dmac[5]);
     // if the shortname exists and is NOT the new default of ab3c, use it for BLE name.
     if (strcmp(owner.short_name, name) != 0) {
         snprintf(name, sizeof(name), "%s_%02x%02x", owner.short_name, dmac[4], dmac[5]);
     } else {
-        snprintf(name, sizeof(name), "Meshtastic_%02x%02x", dmac[4], dmac[5]);
+        snprintf(name, sizeof(name), "MESHCN_%02x%02x", dmac[4], dmac[5]);
     }
     return name;
 }
@@ -426,7 +426,7 @@ void setup()
     powerMonInit();
     serialSinceMsec = millis();
 
-    LOG_INFO("\n\n//\\ E S H T /\\ S T / C\n");
+    LOG_INFO("\n\n//\\ E S H C N\n");
 
     initDeepSleep();
 

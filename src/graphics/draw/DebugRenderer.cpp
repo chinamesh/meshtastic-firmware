@@ -221,7 +221,7 @@ void drawFrameWiFi(OLEDDisplay *display, OLEDDisplayUiState *state, int16_t x, i
     snprintf(ssidStr, sizeof(ssidStr), "SSID: %s", wifiName);
     display->drawString(x, getTextPositions(display)[line++], ssidStr);
 
-    display->drawString(x, getTextPositions(display)[line++], "URL: http://meshtastic.local");
+    display->drawString(x, getTextPositions(display)[line++], "URL: http://meshcn.local");
 
     /* Display a heartbeat pixel that blinks every time the frame is redrawn */
 #ifdef SHOW_REDRAWS
